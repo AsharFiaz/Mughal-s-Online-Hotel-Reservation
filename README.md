@@ -44,5 +44,9 @@ A modern full-stack web application that allows users to add, manage, and review
 git clone https://github.com/your-username/mughals-hotel-reservation.git
 cd mughals-hotel-reservation
 npm install
-add .env file
+add .env file cloudinary mongodbatlasurl and secret etc
 now node index.js
+
+
+ This project uses Jenkins for automated deployment.
+   Testing webhook auto-trigger!
