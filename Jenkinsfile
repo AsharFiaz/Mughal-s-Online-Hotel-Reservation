@@ -35,7 +35,7 @@ EOF
             steps {
                 echo 'Stopping any existing containers...'
                 sh '''
-                    docker compose -f ${COMPOSE_FILE} down || true
+                    sudo docker compose -f ${COMPOSE_FILE} down || true
                 '''
             }
         }
@@ -44,7 +44,7 @@ EOF
             steps {
                 echo 'Starting application containers...'
                 sh '''
-                    docker compose -f ${COMPOSE_FILE} up -d
+                    sudo docker compose -f ${COMPOSE_FILE} up -d
                 '''
             }
         }
@@ -56,9 +56,9 @@ EOF
                     echo "Waiting for application to start..."
                     sleep 25
                     echo "Checking container status..."
-                    docker ps
+                    sudo docker ps
                     echo "Checking application logs..."
-                    docker logs hotel-app-jenkins --tail 30 || echo "Container not ready yet"
+                    sudo docker logs hotel-app-jenkins --tail 30 || echo "Container not ready yet"
                 '''
             }
         }
@@ -95,8 +95,8 @@ EOF
             echo '❌ DEPLOYMENT FAILED!'
             echo '❌ Check logs below for errors'
             echo '❌ ============================================='
-            sh 'docker logs hotel-app-jenkins --tail 100 || echo "No container logs available"'
-            sh 'docker ps -a | grep jenkins || echo "No jenkins containers found"'
+            sh 'sudo docker logs hotel-app-jenkins --tail 100 || echo "No container logs available"'
+            sh 'sudo docker ps -a | grep jenkins || echo "No jenkins containers found"'
         }
         always {
             echo 'Build completed. Check results above.'
